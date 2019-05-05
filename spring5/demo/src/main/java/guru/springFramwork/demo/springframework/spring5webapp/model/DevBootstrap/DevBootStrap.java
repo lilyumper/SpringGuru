@@ -3,7 +3,7 @@ package guru.springFramwork.demo.springframework.spring5webapp.model.DevBootstra
 import guru.springFramwork.demo.springframework.spring5webapp.model.Author;
 import guru.springFramwork.demo.springframework.spring5webapp.model.Book;
 import guru.springFramwork.demo.springframework.spring5webapp.model.Publisher;
-import guru.springFramwork.demo.springframework.spring5webapp.model.repositories.AuthorRespository;
+import guru.springFramwork.demo.springframework.spring5webapp.model.repositories.AuthorRepository;
 import guru.springFramwork.demo.springframework.spring5webapp.model.repositories.BookRepository;
 import guru.springFramwork.demo.springframework.spring5webapp.model.repositories.PublisherRepository;
 import org.springframework.context.ApplicationListener;
@@ -13,13 +13,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class DevBootStrap implements ApplicationListener<ContextRefreshedEvent> {
 
-    private AuthorRespository authorRespository;
+    private AuthorRepository authorRepository;
     private BookRepository  bookRepository;
     private PublisherRepository publisherRepository;
 
-    public DevBootStrap(AuthorRespository authorRespository, BookRepository bookRepository,
+    public DevBootStrap(AuthorRepository authorRepository, BookRepository bookRepository,
                         PublisherRepository publisherRepository) {
-        this.authorRespository = authorRespository;
+        this.authorRepository = authorRepository;
         this.bookRepository = bookRepository;
         this.publisherRepository = publisherRepository;
     }
@@ -42,7 +42,7 @@ public class DevBootStrap implements ApplicationListener<ContextRefreshedEvent> 
         eric.getBooks().add(ddd);
         ddd.getAuthors().add(eric);
 
-        authorRespository.save(eric);
+        authorRepository.save(eric);
         bookRepository.save(ddd);
 
         //Rod
@@ -50,7 +50,7 @@ public class DevBootStrap implements ApplicationListener<ContextRefreshedEvent> 
         Book noEjb = new Book("J2EE Development without EJ8", "23444", publisher);
         rod.getBooks().add(noEjb);
 
-        authorRespository.save(rod);
+        authorRepository.save(rod);
         bookRepository.save(noEjb);
 
     }
